@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  dev-pureftpd:
+    image: gists/pure-ftpd:${PUREFTPD_IMAGE_TAG}
+    container_name: dev-pureftpd
+    hostname: dev-pureftpd
+    restart: unless-stopped
+    environment:
+      - PUBLIC_HOST=${PUREFTPD_PUBLIC_HOST}
+      - MIN_PASV_PORT=${PUREFTPD_PASV_PORT_MIN}
+      - MAX_PASV_PORT${PUREFTPD_PASV_PORT_MAX}
+    ports:
+      - "${PUREFTPD_PORT}:21"
+      - "${PUREFTPD_PASV_PORT_MIN}-${PUREFTPD_PASV_PORT_MAX}:${PUREFTPD_PASV_PORT_MIN}-${PUREFTPD_PASV_PORT_MAX}"
+    networks:
+      - dev-pureftpd
+    volumes:
+      - ${PUREFTPD_DATA_DIR}/etc:/etc/pureftpd
+      - ${PUREFTPD_DATA_DIR}/data:/home/ftpuser
+    logging:
+      driver: local
+
+networks:
+  dev-pureftpd:
+    name: dev-pureftpd
