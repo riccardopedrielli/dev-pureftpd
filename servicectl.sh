@@ -52,15 +52,6 @@ check_bin()
     fi
 }
 
-check_function()
-{
-    if [ "$(type -t "${1}")" = "function" ]; then
-        return 0
-    else
-        return 1
-    fi
-}
-
 load_settings()
 {
     set -o allexport
