@@ -15,8 +15,8 @@ readonly ARGS=("${@:2}")
 readonly SERVICE_NAME="pureftpd"
 readonly SERVICE="dev-${SERVICE_NAME}"
 readonly SETTINGS_FILE="settings.env"
-readonly EXTERNAL_CONFIG_DIR="${HOME}/.config/docker-dev-tools/${SERVICE}"
-readonly EXTERNAL_SETTINGS_FILE="${EXTERNAL_CONFIG_DIR}/settings.env"
+readonly EXTERNAL_SETTINGS_DIR="${HOME}/.config/docker-dev-tools/${SERVICE}"
+readonly EXTERNAL_SETTINGS_FILE="${EXTERNAL_SETTINGS_DIR}/${SETTINGS_FILE}"
 
 print_usage()
 {
