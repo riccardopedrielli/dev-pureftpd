@@ -16,8 +16,8 @@ services:
     networks:
       - dev-pureftpd
     volumes:
-      - ${PUREFTPD_DATA_DIR}/etc:/etc/pureftpd
-      - ${PUREFTPD_DATA_DIR}/data:/home/ftpuser
+      - ${PUREFTPD_DATA_DIR}/${PUREFTPD_ETC_DATA_DIR}:/etc/pureftpd
+      - ${PUREFTPD_DATA_DIR}/${PUREFTPD_FTP_DATA_DIR}:/home/ftpuser
     logging:
       driver: local
 
