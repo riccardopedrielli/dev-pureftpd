@@ -41,7 +41,7 @@ print_usage()
 
 echo_error()
 {
-    echo "$(tput setaf 1)${*}$(tput sgr0)"
+    echo -e "\e[0;31m${*}\e[0m"
 }
 
 check_bin()
