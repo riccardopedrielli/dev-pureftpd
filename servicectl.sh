@@ -28,7 +28,7 @@ print_usage()
     echo "    down                            Bring down the service."
     echo "    prune                           Bring down the service and delete the data."
     echo "    info                            Show informations about the service: name, config, status."
-    echo "    logs                            Show service's logs, takes the same arguments as \"docker-compose logs\"."
+    echo "    logs                            Show service's logs, takes the same arguments as \"docker compose logs\"."
     echo "    useradd  <name>  [directory]    Create a new user identified by <name> with access to [directory]."
     echo "                                      If [directory] is not specified, a directory <name> will be created."
     echo "    userdel  <name>                 Delete the user identified by <name>."
@@ -69,13 +69,13 @@ load_settings()
 
 service_up()
 {
-    docker-compose -p ${SERVICE} pull
-    docker-compose -p ${SERVICE} up -d --force-recreate --remove-orphans
+    docker compose -p ${SERVICE} pull
+    docker compose -p ${SERVICE} up -d --force-recreate --remove-orphans
 }
 
 service_down()
 {
-    docker-compose -p ${SERVICE} down --remove-orphans
+    docker compose -p ${SERVICE} down --remove-orphans
 }
 
 service_prune()
@@ -122,7 +122,7 @@ service_info()
     echo
     echo "Status"
 
-    local -r STATUS=$(docker-compose -p ${SERVICE} ps 2> /dev/null)
+    local -r STATUS=$(docker compose -p ${SERVICE} ps 2> /dev/null)
 
     if [ "$(echo "${STATUS}" | wc -l)" -gt 2 ]; then
         echo "${STATUS}" | awk 'NR>1'
@@ -137,7 +137,7 @@ service_info()
 service_logs()
 {
     # shellcheck disable=SC2068
-    docker-compose -p ${SERVICE} logs ${ARGS[@]:-}
+    docker compose -p ${SERVICE} logs ${ARGS[@]:-}
 }
 
 service_useradd()
@@ -176,7 +176,6 @@ service_userlist()
 main()
 {
     check_bin docker
-    check_bin docker-compose
 
     cd "${SCRIPT_DIR}"
 
